@@ -10,6 +10,138 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+const starterQuestion = [
+    {
+        type: "input",
+        name: "name",
+        message: "What is the employee's name?"
+    },
+    {
+        type: "input",
+        name: "id",
+        message: "What is the employee's ID?"
+    },
+    {
+        type: "input",
+        name: "email",
+        message: "What is the employee's email address?"
+    },
+    {
+        type: "list",
+        name: "role",
+        message: "What is the employee's role?",
+        choices: [
+            "Manager",
+            "Engineer",
+            "Intern"
+        ]
+    }
+];
+
+
+const managerQuestion = [
+    {
+        type: "input",
+        name: "officeNumber",
+        message: "What is the Manager's office number?"
+    }
+];
+
+const engineerQuestion = {
+    type: "input",
+    name: "githubUserName",
+    message: "Github username?"
+}
+
+const internQuestion = {
+    type: "input",
+    name: "schoolName",
+    message: "Where does your intern go to school?"
+}
+
+const addEmployee = {
+    type: "list",
+    name: "addEmployee",
+    message: "Would you like to add another employee?",
+    choices: [
+        "Yes",
+        "No"
+    ]
+}
+
+const employeeArray = []
+let employee = "";
+
+async function userData() {
+    try {
+
+        await inquirer.prompt(starterQuestion).then(function (response) {
+            return employeeData = response;
+        });
+
+        switch (employeeData.role) {
+            case "Manager":
+                await inquirer.prompt(managerQuestion).then(function (response) {
+                    employeeData.officeNumber = response.officeNumber;
+                });
+
+                employee = new Manager(employeeData.name, employeeData.id, employeeData.email, employeeData.officeNumber);
+
+                break;
+
+            case "Engineer":
+                await inquirer.prompt(engineerQuestion).then(function (response) {
+                    employeeData.github = response.githubUserName;
+                });
+
+                employee = new Engineer(employeeData.name, employeeData.id, employeeData.email, employeeData.github);
+
+                break;
+
+            case "Intern":
+                await inquirer.prompt(internQuestion).then(function (response) {
+                    employeeData.school = response.schoolName;
+                });
+
+                employee = new Intern(employeeData.name, employeeData.id, employeeData.email, employeeData.school);
+
+                break;
+
+            default:
+
+                break;
+        };
+
+        employeeArray.push(employee);
+        console.log("Employee added!");
+
+        await inquirer.prompt(addEmployee).then(function (response) {
+            return decision = response.addEmployee;
+        });
+
+        if (decision === "Yes") {
+            await userData();
+        } else {
+            console.log(employeeArray);
+
+            let allEmployees = render(employeeArray);
+
+            fs.writeFile(outputPath, allEmployees, function (err) {
+                if (err) {
+                    console.log(err);
+                }
+                console.log("Data entered!");
+            })
+        }
+
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+userData();
+
+
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
