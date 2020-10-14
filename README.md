@@ -24,7 +24,7 @@ This application will prompt the user in the command line to answer information 
   ![alt text](https://i.paste.pics/b8b6f61f694a711af4670e03cef33e8f.png)
 
   ## Demo
-  Click [HERE](https://drive.google.com/file/d/1UDz0z_IrK7chqWFQ03-HE-GrzdMkOOpK/view) for a video tutorial of the application.
+  Click [HERE](https://drive.google.com/file/d/1g-YMERS94nwd8DBYcBAj2W1a2DgYCWYZ/view) for a video tutorial of the application.
 
   ## License
    [![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
