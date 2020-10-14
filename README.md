@@ -18,7 +18,7 @@ This application will prompt the user in the command line to answer information 
   After running npm install the user will have to then run node app.js. Following that, the user will answer a few prompted commands with their information. Once completed the html file will be generated and added as a file.
   
   ## Tests
-    node index.js
+    node app.js
 
   ## Visuals
   ![alt text](https://i.paste.pics/b8b6f61f694a711af4670e03cef33e8f.png)
